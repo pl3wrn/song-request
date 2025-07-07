@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>ฤดูร้อน ⛅</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans Thai', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 3rem 2.5rem;
+      border-radius: 25px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 10px 25px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      animation: containerGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes containerGlow {
+      0% { box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 10px 25px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(102, 126, 234, 0.3);
+      }
+      100% { box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 10px 25px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 0 40px rgba(240, 147, 251, 0.4);
+      }
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #fff, #f093fb, #667eea);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      animation: gradientShift 4s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    p.subtitle {
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .radio-group {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .radio-label {
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .radio-label:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="radio"] {
+      accent-color: #f093fb;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+      transform: scale(1.1);
+    }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 1.2rem 1.8rem;
+      font-size: 1.1rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      outline: none;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      text-align: center;
+    }
+
+    input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    input[type="text"]:focus {
+      border-color: #f093fb;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 0 0 4px rgba(240, 147, 251, 0.2),
+        0 10px 25px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    button {
+      width: 100%;
+      padding: 1.2rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+      background-size: 200% 200%;
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: buttonGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes buttonGlow {
+      0% { 
+        background-position: 0% 50%;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+      100% { 
+        background-position: 100% 50%;
+        box-shadow: 0 8px 30px rgba(240, 147, 251, 0.4);
+      }
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .status-message {
+      margin-top: 1.5rem;
+      min-height: 48px;
+      font-weight: 500;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      padding: 0 1.5rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .success {
+      background: rgba(176, 248, 179, 0.2);
+      color: #ffffff;
+      border-color: rgba(255, 248, 248, 0.3);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .error {
+      background: rgba(244, 67, 54, 0.2);
+      color: #f44336;
+      border-color: rgba(244, 67, 54, 0.3);
+      box-shadow: 0 0 20px rgba(244, 67, 54, 0.3);
+    }
+
+    .loading {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .music-notes {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      animation: musicFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes musicFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+      50% { transform: translateX(-50%) translateY(-10px) rotate(10deg); }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 1rem;
+        padding: 2rem 1.5rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .radio-group {
+        gap: 1rem;
+      }
+      
+      .radio-label {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles"></div>
+  
+  <div class="container">
+    <div class="music-notes">♪ ♫ ♪</div>
+    
+    <h1>ขอเพลงฤดูร้อน ⛅</h1>
+    <p class="subtitle">จะส่งเป็นลิ้งหรือ ชื่อเพลงมาก็ได้นะครับ</p>
+
+    <div class="radio-group">
+      <label class="radio-label">
+        <input type="radio" name="type" value="Boombox" checked />
+        🎵 Boombox
+      </label>
+      <label class="radio-label">
+        <input type="radio" name="type" value="Karaoke" />
+        🎤 Karaoke
+      </label>
+    </div>
+
+    <div class="input-wrapper">
+      <input
+        type="text"
+        id="songInput"
+        placeholder="🎶 พิมพ์ชื่อเพลงหรือศิลปิน"
+        autocomplete="off"
+      />
+    </div>
+
+    <button id="submitBtn" onclick="submitSong()">
+      <span id="btnText">🎶 ส่งคำขอ</span>
+    </button>
+
+    <div id="status" class="status-message"></div>
+  </div>
+
+  <script>
+    const webhookURL = "https://discord.com/api/webhooks/1391791959512842260/D5ebJ1RcY8nlAC8Z5FTRNoLpIUjoUcNvjjSaikWNz-Y4e-Tq19FUM5s_E2aG3BtwNCck";
+
+    function createParticles() {
+      const particles = document.querySelector('.particles');
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        particles.appendChild(particle);
+      }
+    }
+
+    function submitSong() {
+      const input = document.getElementById("songInput");
+      const song = input.value.trim();
+      const submitBtn = document.getElementById("submitBtn");
+      const btnText = document.getElementById("btnText");
+
+      if (!song) {
+        showMessage("พิมพ์ชื่อเพลงก่อน", "error");
+        return;
+      }
+
+      const typeInput = document.querySelector('input[name="type"]:checked');
+      const selectedType = typeInput ? typeInput.value : "Boombox";
+
+      btnText.innerHTML = '<span class="loading"></span> กำลังส่ง...';
+      submitBtn.disabled = true;
+
+      const timeStr = new Date().toLocaleString("th-TH", {
+        timeZone: "Asia/Bangkok",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const embed = {
+        title: "Song Request",
+        description:
+          "**ชื่อเพลง:**\n" +
+          `${song}\n\n` +
+          "**ประเภทเพลง:**\n" +
+          `${selectedType}\n\n` +
+          "**เวลาที่ขอ:**\n" +
+          `${timeStr}`,
+        color: 0x667eea,
+        footer: { text: "ขอเพลงบอท 🎶" },
+        timestamp: new Date().toISOString(),
+      };
+
+      const payload = { embeds: [embed] };
+
+      fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => {
+          if (res.ok) {
+            showMessage(`ส่งคำขอเพลงเรียบร้อย: "${song}" (${selectedType})`, "success");
+            input.value = "";
+            
+            createCelebrationEffect();
+          } else {
+            throw new Error("ส่งไม่สำเร็จ");
+          }
+        })
+        .catch(() => {
+          showMessage("ส่งไม่สำเร็จ กรุณาลองใหม่อีกครั้ง", "error");
+        })
+        .finally(() => {
+          btnText.innerHTML = "ส่งคำขอเพลง";
+          submitBtn.disabled = false;
+        });
+    }
+
+    function showMessage(msg, type) {
+      const status = document.getElementById("status");
+      status.textContent = msg;
+      status.className = "status-message " + type;
+
+      setTimeout(() => {
+        status.textContent = "";
+        status.className = "status-message";
+      }, 5000);
+    }
+
+    function createCelebrationEffect() {
+      const container = document.querySelector('.container');
+      for (let i = 0; i < 10; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = '10px';
+        confetti.style.height = '10px';
+        confetti.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        confetti.style.borderRadius = '50%';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '0%';
+        confetti.style.pointerEvents = 'none';
+        confetti.style.zIndex = '10';
+        confetti.style.animation = `confettiFall ${Math.random() * 2 + 1}s ease-out forwards`;
+        container.appendChild(confetti);
+        
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes confettiFall {
+        to {
+          transform: translateY(400px) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    document.getElementById("songInput").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") submitSong();
+    });
+
+    window.addEventListener('load', createParticles);
+  </script>
+</body>
+</html>
